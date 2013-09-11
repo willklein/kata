@@ -2,6 +2,7 @@ var World = function(rows, columns) {
     this.rows = rows;
     this.columns = columns;
     this.cells = [];
+    this.generation = 1;
 };
 
 World.prototype.getCell = function(row, column) {
@@ -29,6 +30,8 @@ World.prototype.iterate = function() {
         change = changes[i];
         change.cell.state = change.state;
     }
+
+    this.generation++;
 };
 
 World.prototype.linkNeighbors = function(cell) {
@@ -36,29 +39,30 @@ World.prototype.linkNeighbors = function(cell) {
     var column = cell.column;
     var isTopEdge = !row;
     var isLeftEdge = !column;
+    var isRightEdge = column === this.columns - 1;
     
-    var linkTopLeft = function () {
+    var linkTopLeft = function() {
         var topLeftCell = this.getCell(row - 1, column - 1);
 
         topLeftCell.addNeighbor(cell);
         cell.addNeighbor(topLeftCell);
     };
     
-    var linkTop = function () {
+    var linkTop = function() {
         var topCell = this.getCell(row - 1, column);
 
         topCell.addNeighbor(cell);
         cell.addNeighbor(topCell);
     };
     
-    var linkTopRight = function () {
+    var linkTopRight = function() {
         var topRightCell = this.getCell(row - 1, column + 1);
 
         topRightCell.addNeighbor(cell);
         cell.addNeighbor(topRightCell);
     };
     
-    var linkLeft = function () {
+    var linkLeft = function() {
         var leftCell = this.getCell(row, column - 1);
 
         leftCell.addNeighbor(cell);
@@ -71,6 +75,10 @@ World.prototype.linkNeighbors = function(cell) {
         }
         
         linkTop.call(this);
+        
+        if (!isRightEdge) {
+            linkTopRight.call(this);
+        }
     }
     
     if (!isLeftEdge) {
@@ -85,6 +93,8 @@ World.prototype.add = function(cell) {
 };
 
 World.prototype.log = function() {
+    console.log('Generation ' + this.generation);
+
     for (var i = 0; i < this.rows; i++) {
         var row = '';
         

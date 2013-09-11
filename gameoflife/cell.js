@@ -21,13 +21,16 @@ Cell.prototype.iterate = function() {
     }
     
     if (this.state === '0' && alive === 3) {
-        return 
+        return {
+            cell: this,
+            state: '1'
+        };
     }
     
     if (this.state === '1' && (alive < 2 || alive > 3)) {
         return {
             cell: this,
-            state: 0
+            state: '0'
         };
     }
 };
