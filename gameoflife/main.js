@@ -1,6 +1,4 @@
 (function() {
-
-
 	var ctx = document.getElementById('canvas').getContext('2d');
 
 	var fill = function(column, row) {
