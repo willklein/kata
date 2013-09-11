@@ -1,6 +1,6 @@
-var World = function(rows, columns) {
-    this.rows = rows;
-    this.columns = columns;
+var World = function() {
+    this.rows = 1;
+    this.columns = 1;
     this.cells = [];
     this.generation = 1;
 };
@@ -66,20 +66,41 @@ World.prototype.linkNeighbors = function(cell) {
 
 
 World.prototype.add = function(cell) {
+    if (cell.row + 1 > this.rows) {
+        this.rows = cell.row + 1;
+    }
+    
+    if (cell.column + 1 > this.columns) {
+        this.columns = cell.column + 1;
+    }
+
     this.cells.push(cell);
     this.linkNeighbors(cell);
 };
 
 World.prototype.log = function() {
+	var i, j, row;
+
     console.log('Generation ' + this.generation);
 
-    for (var i = 0; i < this.rows; i++) {
-        var row = '';
+    for (i = 0; i < this.rows; i++) {
+        row = '';
         
-        for (var j = 0; j < this.columns; j++) {
+        for (j = 0; j < this.columns; j++) {
             row += this.getCell(i, j).state + ' ';
         }
         
         console.log(row);
+    }
+};
+
+World.prototype.each = function(fn) {
+	var i, j, cell;
+
+    for (i = 0; i < this.rows; i++) {
+        for (j = 0; j < this.columns; j++) {
+        	cell = this.getCell(i, j);
+            fn.call(cell);
+        }
     }
 };

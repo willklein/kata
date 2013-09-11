@@ -1,13 +1,29 @@
 (function() {
-	var world = new World(20, 20);
 
-	// var input = [
-	//     '0 1 0 0 0',
-	//     '1 0 0 1 1',
-	//     '1 1 0 0 1',
-	//     '0 1 0 0 0',
-	//     '1 0 0 0 1'
-	// ];
+
+	var ctx = document.getElementById('canvas').getContext('2d');
+
+	var fill = function(column, row) {
+		var size = 10;
+		var margin = 50;
+		ctx.fillRect(margin + 12 * column, margin + 12 * row, size, size);
+	}
+
+	var draw = function() {
+		ctx.fillStyle = this.state === '1' ? "rgb(200,0,0)" : "rgb(230,230,230)";
+		fill(this.column, this.row);
+	};
+
+
+	var world = new World();
+
+	var input5 = [
+	    '0 1 0 0 0',
+	    '1 0 0 1 1',
+	    '1 1 0 0 1',
+	    '0 1 0 0 0',
+	    '1 0 0 0 1'
+	];
 
 	var input20 = [
         '0 1 0 0 0 0 1 0 0 0 0 1 0 1 0 0 1 0 0 0',
@@ -55,12 +71,10 @@
 	})(input20);
 
 	var iterate = function() {
+		// world.log();
+		world.each(draw)
 		world.iterate();
-		world.log();
 	};
-
-	world.log();
-	iterate();
 
 	setInterval(iterate, 500);
 })();
