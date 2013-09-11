@@ -99,7 +99,7 @@ World.prototype.each = function(fn) {
 
     for (i = 0; i < this.rows; i++) {
         for (j = 0; j < this.columns; j++) {
-        	cell = this.getCell(i, j);
+            cell = this.getCell(i, j);
             fn.call(cell);
         }
     }
