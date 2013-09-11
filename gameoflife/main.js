@@ -48,7 +48,7 @@
         '1 0 0 0 0 1 0 0 0 1 0 0 0 0 1 1 0 0 0 1'
     ];
 
-	var parseInput = (function(input) {
+	var parseInput = function(input) {
 	    var i, length;
 	    var row = 0;
 	    
@@ -68,13 +68,44 @@
 	    for (i = 0, length = input.length; i < length; i++) {
 	        parseRow(input[i]);
 	    }
-	})(input20);
-
-	var iterate = function() {
-		// world.log();
-		world.each(draw)
-		world.iterate();
 	};
 
-	setInterval(iterate, 500);
+	parseInput(input5);
+
+	world.log();
+	world.each(draw)
+
+	var iterate = function() {
+		world.iterate();
+		world.log();
+		world.each(draw)
+	};
+    
+    var interval;
+    
+    var play = function() {
+        interval = setInterval(iterate, 500);
+    };
+    
+    var stop = function() {
+        clearInterval(interval);
+    };
+    
+    var step = function() {
+        stop();
+        iterate();
+    };
+
+    var reset = function() {
+    	stop();
+    	world = new World();
+    	parseInput(input5);
+		world.log();
+		world.each(draw)
+    };
+    
+    document.getElementById('play').onclick = play;
+    document.getElementById('pause').onclick = stop;
+    document.getElementById('step').onclick = step;
+    document.getElementById('reset').onclick = reset;
 })();
