@@ -79,7 +79,7 @@ World.prototype.add = function(cell) {
 };
 
 World.prototype.log = function() {
-	var i, j, row;
+    var i, j, row;
 
     console.log('Generation ' + this.generation);
 
@@ -95,7 +95,7 @@ World.prototype.log = function() {
 };
 
 World.prototype.each = function(fn) {
-	var i, j, cell;
+    var i, j, cell;
 
     for (i = 0; i < this.rows; i++) {
         for (j = 0; j < this.columns; j++) {
