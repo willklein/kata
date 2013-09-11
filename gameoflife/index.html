@@ -3,23 +3,24 @@
     <title>game of life : Will Klein</title>
 </head>
 <body>
-	<div>
-		<label>Select input:</label>
-		<select id="inputSet">
-			<option value="5x5">5x5</option>
-			<option value="20x20">20x20</option>
-		</select>
-
-		<button id="play">Play</button>
-		<button id="pause">Pause</button>
-		<button id="step">Step</button>
-		<button id="reset">Reset</button>
-
-		<br>
-		<p>Generation <span id="generation">1</span></p>
-	</div>
-	<canvas id="canvas" width="400" height="400"></canvas>
-
+    <div>
+        <label>Select input:</label>
+        <select id="inputSet">
+            <option value="5x5">5x5</option>
+            <option value="20x20">20x20</option>
+        </select>
+        
+        <button id="play">Play</button>
+        <button id="pause">Pause</button>
+        <button id="step">Step</button>
+        <button id="reset">Reset</button>
+        
+        <br>
+        <p>Generation <span id="generation">1</span></p>
+    </div>
+    
+    <canvas id="canvas" width="400" height="400"></canvas>
+    
     <script type="text/javascript" src="cell.js"></script>
     <script type="text/javascript" src="world.js"></script>
     <script type="text/javascript" src="main.js"></script>
