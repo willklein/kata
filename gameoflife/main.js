@@ -49,7 +49,7 @@
         '1 0 0 0 0 1 0 0 0 1 0 0 0 0 1 1 0 0 0 1'
     ];
 
-	var parseInput = function(input) {
+    var parseInput = function(input) {
         var i, length;
         var row = 0;
         
@@ -69,7 +69,7 @@
         for (i = 0, length = input.length; i < length; i++) {
             parseRow(input[i]);
         }
-	};
+    };
 
     parseInput(input5x5);
     
