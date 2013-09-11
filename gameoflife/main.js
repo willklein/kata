@@ -6,7 +6,7 @@
 	var fill = function(column, row) {
 		var size = 10;
 		var margin = 50;
-		ctx.fillRect(margin + 12 * column, margin + 12 * row, size, size);
+		ctx.fillRect(margin + 12 * column, 12 * row, size, size);
 	}
 
 	var draw = function() {
@@ -78,10 +78,13 @@
 	world.log();
 	world.each(draw)
 
+	var generationElement = document.getElementById('generation');
+
 	var iterate = function() {
 		world.iterate();
 		world.log();
 		world.each(draw)
+		generationElement.textContent = world.generation;
 	};
     
     var interval;
