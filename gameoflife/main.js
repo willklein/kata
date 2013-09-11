@@ -34,4 +34,6 @@
 	parseInput(input);
 
 	world.log();
+	world.iterate();
+	world.log();
 })();
