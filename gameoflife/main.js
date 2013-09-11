@@ -129,6 +129,7 @@
 
 		world.log();
 		world.each(draw)
+		generationElement.textContent = '1';
     };
     
     document.getElementById('play').onclick = play;
