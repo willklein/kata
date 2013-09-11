@@ -14,10 +14,13 @@
 		fill(this.column, this.row);
 	};
 
+	var clear = function() {
+		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+	};
 
 	var world = new World();
 
-	var input5 = [
+	var input5x5 = [
 	    '0 1 0 0 0',
 	    '1 0 0 1 1',
 	    '1 1 0 0 1',
@@ -25,7 +28,7 @@
 	    '1 0 0 0 1'
 	];
 
-	var input20 = [
+	var input20x20 = [
         '0 1 0 0 0 0 1 0 0 0 0 1 0 1 0 0 1 0 0 0',
         '1 0 0 1 1 1 0 0 1 1 1 0 0 1 0 1 0 0 1 1',
         '1 1 0 0 1 1 1 0 0 1 1 1 0 0 1 1 1 0 0 1',
@@ -70,7 +73,7 @@
 	    }
 	};
 
-	parseInput(input5);
+	parseInput(input5x5);
 
 	world.log();
 	world.each(draw)
@@ -96,10 +99,31 @@
         iterate();
     };
 
+
+    var inputSetElement = document.getElementById('inputSet');
+
     var reset = function() {
+    	var inputSetValue = inputSetElement.options[inputSetElement.selectedIndex].value;
+
+    	switch (inputSetValue) {
+    		case '5x5':
+    			input = input5x5;
+    			break;
+
+    		case '20x20':
+    			input = input20x20;
+    			break;
+
+    		default:
+    			input = input5x5;
+    	}
+
     	stop();
+    	clear();
+
     	world = new World();
-    	parseInput(input5);
+    	parseInput(input);
+
 		world.log();
 		world.each(draw)
     };
@@ -108,4 +132,5 @@
     document.getElementById('pause').onclick = stop;
     document.getElementById('step').onclick = step;
     document.getElementById('reset').onclick = reset;
+    inputSetElement.onchange = reset;
 })();
